@@ -256,6 +256,9 @@ def flushing():
     time.sleep(10)
     sysLog.insert(0.0,'akhir flushing - '+getTime()+'\n')
     running = False
+
+def testing():
+    print("testing")
     
 def prediction():
     # load the model from disk
@@ -572,8 +575,8 @@ vlastdata = Label(rightFrame, text='Last data:',font=("Arial", 10)).grid(row=3, 
 #predictingBtn.grid(row=0, column=0, padx=5, pady=2)
 #settingBtn.pack(side=TOP, anchor=W, fill=X, expand=YES)
 
-samplingBtn = Button(btnFrame, text="Sampling", command=sampling, height=3)
-samplingBtn.grid(row=0, column=1, padx=5, pady=2)
+samplingBtn = Button(leftFrame, text="Sampling", command=sampling, height=3)
+samplingBtn.grid(row=8, column=0, padx=1    , pady=2)
 #settingBtn.pack(side=TOP, anchor=W, fill=X, expand=YES)
 
 #restartBtn = Button(btnFrame, text="Restart", command=restart, height=3)
@@ -584,11 +587,14 @@ samplingBtn.grid(row=0, column=1, padx=5, pady=2)
 #shutdownBtn.grid(row=0, column=3, padx=5, pady=2)
 #shutdownBtn.pack(side=TOP, anchor=W, fill=X, expand=YES)
 
-closebutton = Button(btnFrame, text="Close", command=Close, height=3)
-closebutton.grid(row=0, column=4, padx=5, pady=2)
+closebutton = Button(leftFrame, text="Close", command=Close, height=3)
+closebutton.grid(row=9, column=4, columnspan=3, padx=5, pady=2)
 
-flushingbutton = Button(btnFrame, text="Flushing", command=flushing, height=3)
-flushingbutton.grid(row=0, column=5, padx=5, pady=2)
+flushingbutton = Button(leftFrame, text="Flushing", command=flushing, height=3)
+flushingbutton.grid(row=8, column=1, padx=1, pady=2)
+
+testingbutton = Button(leftFrame, text="Testing", command=testing, height=3)
+testingbutton.grid(row=8, column=2, padx=1, pady=2)
 
 
 sysLog = Text(rightFrame, width = 50, height = 17, takefocus=0, bg="white", fg="blue")
