@@ -511,29 +511,57 @@ def Close():
 #relay_manual("off",18)
 
 #Left Frame and its contents
-leftFrame = Frame(root, width=150, height = 500)
-leftFrame.grid(row=0, column=0, padx=5, pady=2, sticky='ew')
-Label(leftFrame, text="Prediksi Sampel:", font=("Arial", 13)).grid(row=1, column=0, padx=10, pady=2)
-Label(leftFrame, text="Nilai TVC Terakhir:", font=("Arial", 13)).grid(row=3, column=0, padx=10, pady=2)
+leftFrame = Frame(root , width=700, height = 500)
+leftFrame.grid(row=0, column=0, padx=50, pady=2, sticky='ew')
 
-#status_sample = Label(leftFrame, text='                      ', font=("Arial", 15),fg="#0000FF")
-status_sample = Label(leftFrame, text='-', font=("Arial", 13),fg="#0000FF")
-status_sample.grid(row=2, column=0, padx=10, pady=2)
+tnoseAtas = Text(leftFrame, width= 50, height=12, bg="white")
+tnoseAtas.grid(row=0, rowspan=2, column=0, columnspan=4, pady=20)
+# tnoseAtas.insert(0.0, "T-NOSE")
+
+# Label dengan teks berada di kiri
+label_prediksi = tk.Label(leftFrame, text="Prediksi Sampel", font=("Arial", 13))
+label_prediksi.grid(row=2, column=0, padx=12, pady=2, sticky='w')
+
+label_nilai_tvc = tk.Label(leftFrame, text="Nilai TVC Terakhir", font=("Arial", 13))
+label_nilai_tvc.grid(row=4, column=0, padx=12, pady=2, sticky='w')
+# Label(leftFrame, text="Prediksi Sampel", font=("Arial", 13)).grid(row=2, column=0, padx=10, pady=2)
+# Label(leftFrame, text="Nilai TVC Terakhir", font=("Arial", 13)).grid(row=4, column=0, padx=10, pady=2)
+
+#status_sample = Label(leftFrame, text='', font=("Arial", 15),fg="#0000FF")
+status_sample = Label(leftFrame, text=': -', font=("Arial", 13),fg="#0000FF")
+status_sample.grid(row=2, column=1, padx=10, pady=2, sticky="we")
 
 #Label(leftFrame, text="Prediksi Nilai TVC:", font=("Arial", 15)).grid(row=3, column=0, padx=10, pady=2)
 #tvc = Label(leftFrame, text='                      ', font=("Arial", 15),fg="#0000FF")
-tvc = Label(leftFrame, text='-', font=("Arial", 13),fg="#0000FF")
-tvc.grid(row=4, column=0, padx=10, pady=2)
+tvc = Label(leftFrame, text=': -', font=("Arial", 13),fg="#0000FF")
+tvc.grid(row=4, column=1, padx=12, pady=2, sticky="we")
 
-Label(leftFrame, text="Sampling Interval (menit):", font=("Arial", 10)).grid(row=5, column=0, padx=1, pady=2)
+Label(leftFrame, text="Sampling Interval (menit)", font=("Arial", 10)).grid(row=5, column=0, padx=12 , pady=2)
 samplingInterval = Text(leftFrame, width = 5, height = 1, takefocus=0, bg="white", fg="blue")
-samplingInterval.grid(row=6, column=0, padx=1, pady=2)
-samplingInterval.insert(0.0, "2")
+samplingInterval.grid(row=5, column=1, pady=2)
+samplingInterval.insert(0.0, ": 2")
+
+samplingbutton = Button(leftFrame, text="Sampling", command=sampling, height=3, width=10)
+samplingbutton.grid(row=8, column=0, padx= 5, pady=20, sticky="we")
+
+testingbutton = Button(leftFrame, text="Testing", command=testing, height=3, width=10)
+testingbutton.grid(row=8, column=1, padx=5, pady=2, sticky="we")
+
+flushingbutton = Button(leftFrame, text="Flushing", command=flushing, height=3, width=10)
+flushingbutton.grid(row=8, column=2, padx=5, pady=2, sticky="we")
+
+predictingbutton = Button(leftFrame, text="Predict", command=predicting, height=3, width=10) # Set width to 15
+predictingbutton.grid(row=8, column=3, padx=5, pady=2, sticky="we")
+
+closebutton = Button(leftFrame, text="Close", command=Close, height=3)
+closebutton.grid(row=9, column=0, columnspan=4, padx=5, pady=2, sticky="we")
+
+
 
 #print(samplingInterval.get("1.0","end"))
+rightFrame = Frame(root, width=600, height=500)
+rightFrame.grid(row=0, column=1, padx=40, pady=20, sticky='ew')
 
-rightFrame = Frame(root, width=600, height=480)
-rightFrame.grid(row=0, column=1, padx=5, pady=2, sticky='ew')
 try:
     sysLog = Text(rightFrame, width = 50, height = 17, takefocus=0, bg="white", fg="blue")
     sysLog.grid(row=3, column=0, padx=5, pady=2, columnspan=2)
@@ -551,32 +579,28 @@ except:
 ##tvc.grid(row=4, column=0, padx=10, pady=2)
 
 #Right Frame and its contents
-rightFrame = Frame(root, width=600, height = 480)
-rightFrame.grid(row=0, column=1, padx=5, pady=2, sticky='ew')
+# rightFrame = Frame(root, width=600, height = 480)
+# rightFrame.grid(row=0, column=1, pady=2, sticky='ew')
 
 
 #circleCanvas = Canvas(rightFrame, width=100, height=100, bg='white')
 #circleCanvas.grid(row=0, column=0, padx=10, pady=2)
 
-Label(rightFrame, text="System Status:"+status, font=("Arial", 14)).grid(row=0, column=0, padx=10, pady=2, columnspan=1)
+Label(rightFrame, text="System Status:"+status, font=("Arial", 14)).grid(row=0, column=0, pady=2, columnspan=2, sticky="w")
 #Label(rightFrame, text=status, font=("Arial", 15)).grid(row=1, column=0, padx=10, pady=2, columnspan=2)
 ##Label(rightFrame, text="Suhu:", font=("Arial", 15)).grid(row=1, column=0, padx=10, pady=2)
 ##Label(rightFrame, text="Kelembaban:", font=("Arial", 15)).grid(row=1, column=1, padx=10, pady=2)
 btnFrame = Frame(root, width=1000, height = 200)
 btnFrame.grid(row=3, column=0, padx=5, pady=2, columnspan=2)
 
-vhumid = Label(rightFrame, text='Humidity: -', font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=2)
-vtempe = Label(rightFrame, text='Temperature: -', font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=2)
+vhumid = Label(rightFrame, text='Humidity: -', font=("Arial", 12)).grid(row=1, column=0, pady=2, sticky="w")
+vtempe = Label(rightFrame, text='Temperature: -', font=("Arial", 12)).grid(row=1, column=1, pady=2, sticky="w")
 vlastdata = Label(rightFrame, text='Last data:',font=("Arial", 10)).grid(row=3, column=0, columnspan=2, padx=10, pady=2)
 
 
 
 #predictingBtn = Button(btnFrame, text="Predicting", command=predicting, height=3)
 #predictingBtn.grid(row=0, column=0, padx=5, pady=2)
-#settingBtn.pack(side=TOP, anchor=W, fill=X, expand=YES)
-
-samplingBtn = Button(leftFrame, text="Sampling", command=sampling, height=3)
-samplingBtn.grid(row=8, column=0, padx=1    , pady=2)
 #settingBtn.pack(side=TOP, anchor=W, fill=X, expand=YES)
 
 #restartBtn = Button(btnFrame, text="Restart", command=restart, height=3)
@@ -587,18 +611,10 @@ samplingBtn.grid(row=8, column=0, padx=1    , pady=2)
 #shutdownBtn.grid(row=0, column=3, padx=5, pady=2)
 #shutdownBtn.pack(side=TOP, anchor=W, fill=X, expand=YES)
 
-closebutton = Button(leftFrame, text="Close", command=Close, height=3)
-closebutton.grid(row=9, column=4, columnspan=3, padx=5, pady=2)
-
-flushingbutton = Button(leftFrame, text="Flushing", command=flushing, height=3)
-flushingbutton.grid(row=8, column=1, padx=1, pady=2)
-
-testingbutton = Button(leftFrame, text="Testing", command=testing, height=3)
-testingbutton.grid(row=8, column=2, padx=1, pady=2)
 
 
-sysLog = Text(rightFrame, width = 50, height = 17, takefocus=0, bg="white", fg="blue")
-sysLog.grid(row=3, column=0, padx=5, pady=2, columnspan=2)
+sysLog = Text(rightFrame, width = 50, height = 29, takefocus=0, bg="white", fg="blue")
+sysLog.grid(row=3, column=0, padx=5, pady=2, columnspan=2) #text box frame kanan
 
 if status=='Connected':
     sysLog.insert(0.0,'system ready - '+getTime()+'\n')
